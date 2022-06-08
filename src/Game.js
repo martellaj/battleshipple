@@ -25,11 +25,27 @@ function Game() {
         setSelectedTile({ x, y });
       }
     },
-    [selectedTile]
+    [selectedTile, hitShots, missedShots]
   );
 
+  const onFireAwayClicked = useCallback(() => {
+    if (!selectedTile) {
+      return;
+    }
+
+    const isHit = shipCoords.some(
+      (shot) => shot.x === selectedTile.x && shot.y === selectedTile.y
+    );
+
+    if (isHit) {
+      setHitShots([...hitShots, selectedTile]);
+    } else {
+      setMissedShots([...missedShots, selectedTile]);
+    }
+  }, [selectedTile, missedShots, hitShots, shipCoords]);
+
   function Tile(tileProps) {
-    const { x, y, state, onClicked } = tileProps;
+    const { x, y, onClicked } = tileProps;
 
     const isSelected =
       selectedTile && selectedTile.x === x && selectedTile.y === y;
@@ -96,7 +112,11 @@ function Game() {
         <Tile onClicked={onTileClicked} x={4} y={4} />
       </div>
 
-      <Button className="fireAwayButton" color="red">
+      <Button
+        className="fireAwayButton"
+        color="red"
+        onClick={onFireAwayClicked}
+      >
         💣 fire away
       </Button>
     </div>
