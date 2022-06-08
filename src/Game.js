@@ -7,8 +7,8 @@ function Game() {
   const shipCoords = getShipCoords(); // [{x, y}]
 
   const [selectedTile, setSelectedTile] = useState(null);
-  const [missedShots, setMissedShots] = useState([{ x: 0, y: 0 }]);
-  const [hitShots, setHitShots] = useState([{ x: 0, y: 1 }]);
+  const [missedShots, setMissedShots] = useState([]);
+  const [hitShots, setHitShots] = useState([]);
 
   const onTileClicked = useCallback(
     (x, y) => {

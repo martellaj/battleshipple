@@ -19,10 +19,10 @@
   border: 1px solid #00a6ed;
   cursor: pointer;
   display: flex;
-  font-size: xxx-large;
-  height: 100px;
+  font-size: xx-large;
+  height: min(100px, 15vw);
   justify-content: center;
-  width: 100px;
+  width: min(100px, 15vw);
 
   border-top: unset;
   border-right: unset;
