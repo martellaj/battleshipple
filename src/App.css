@@ -1,9 +1,13 @@
+body {
+  background-color: #e4feff;
+}
+
 .App {
   align-items: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   margin: 0 auto;
   max-width: 600px;
   text-align: center;
+  height: 100vh;
 }

@@ -15,7 +15,7 @@
 
 .tile {
   align-items: center;
-  background-color: #d5fcff;
+  background-color: #cffafe;
   border: 1px solid #00a6ed;
   cursor: pointer;
   display: flex;
@@ -37,13 +37,19 @@
 }
 
 .tile--selected {
-  background-color: #b4f5fa;
+  background-color: #a5f3fc;
 }
 
 .tile--missed {
-  background-color: red;
+  background-color: #fca5a5;
 }
 
 .tile--hit {
-  background-color: green;
+  background-color: #86efac;
+}
+
+.fireAwayButton {
+  margin-top: 16px !important;
+  font-variant: all-small-caps;
+  font-size: x-large !important;
 }

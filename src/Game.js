@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import "./Game.css";
 import getShipCoords from "./helpers/getShipCoords";
+import { Button } from "semantic-ui-react";
 
 function Game() {
   const shipCoords = getShipCoords(); // [{x, y}]
@@ -11,7 +12,14 @@ function Game() {
 
   const onTileClicked = useCallback(
     (x, y) => {
-      if (selectedTile && x === selectedTile.x && y === selectedTile.y) {
+      const isMissedShot = missedShots.some(
+        (shot) => shot.x === x && shot.y === y
+      );
+      const isHitShot = hitShots.some((shot) => shot.x === x && shot.y === y);
+
+      if (isMissedShot || isHitShot) {
+        setSelectedTile(null);
+      } else if (selectedTile && x === selectedTile.x && y === selectedTile.y) {
         setSelectedTile(null);
       } else {
         setSelectedTile({ x, y });
@@ -31,6 +39,13 @@ function Game() {
     );
     const isHitShot = hitShots.some((shot) => shot.x === x && shot.y === y);
 
+    let content = "🌊";
+    if (isMissedShot) {
+      content = "❌";
+    } else if (isHitShot) {
+      content = "💥";
+    }
+
     return (
       <div
         className={`tile ${isSelected && "tile--selected"} ${
@@ -38,7 +53,7 @@ function Game() {
         } ${isMissedShot && "tile--missed"} ${isHitShot && "tile--hit"}`}
         onClick={() => onClicked(x, y)}
       >
-        🌊
+        {content}
       </div>
     );
   }
@@ -80,6 +95,10 @@ function Game() {
         <Tile onClicked={onTileClicked} x={3} y={4} />
         <Tile onClicked={onTileClicked} x={4} y={4} />
       </div>
+
+      <Button className="fireAwayButton" color="red">
+        💣 fire away
+      </Button>
     </div>
   );
 }
