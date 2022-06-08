@@ -116,6 +116,7 @@ function Game() {
         className="fireAwayButton"
         color="red"
         onClick={onFireAwayClicked}
+        size="big"
       >
         💣 fire away
       </Button>
