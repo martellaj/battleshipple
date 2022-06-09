@@ -1,0 +1,21 @@
+.helpModalContainer {
+  font-variant: all-small-caps;
+  padding: 24px;
+
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  font-family: "Spinnaker", sans-serif;
+}
+
+#helpModalContainer {
+  display: flex !important;
+  flex-direction: column !important;
+  font-size: 20px;
+}
+
+#helpModalContainer div {
+  margin-bottom: 24px;
+}

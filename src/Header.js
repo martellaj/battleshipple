@@ -1,7 +1,11 @@
 import "./Header.css";
 import { Icon } from "semantic-ui-react";
+import { useState } from "react";
+import HelpModal from "./HelpModal";
 
 function Header() {
+  const [showHelpModal, setShowHelpModal] = useState(false);
+
   return (
     <>
       <div className="headerContainer">
@@ -13,6 +17,7 @@ function Header() {
           }}
           name="help"
           className="button headerButton"
+          onClick={() => setShowHelpModal(true)}
         />
         <span className="headerText">BATTLESHIPPLE</span>
         <Icon
@@ -26,6 +31,7 @@ function Header() {
           className="button headerButton"
         />
       </div>
+      {showHelpModal && <HelpModal onClosed={() => setShowHelpModal(false)} />}
     </>
   );
 }
