@@ -12,5 +12,9 @@ export default function getShipCoords(puzzleNumber) {
       x: 2,
       y: 1,
     },
+    {
+      x: 3,
+      y: 1,
+    },
   ];
 }

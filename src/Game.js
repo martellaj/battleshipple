@@ -1,7 +1,9 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 import "./Game.css";
 import getShipCoords from "./helpers/getShipCoords";
 import { Button } from "semantic-ui-react";
+import PostGameModal from "./PostGameModal";
+import getDailyPuzzleNumber from "./helpers/getDailyPuzzleNumber";
 
 function Game() {
   const shipCoords = getShipCoords(); // [{x, y}]
@@ -9,6 +11,16 @@ function Game() {
   const [selectedTile, setSelectedTile] = useState(null);
   const [missedShots, setMissedShots] = useState([]);
   const [hitShots, setHitShots] = useState([]);
+
+  const [shouldPopPostGameModal, setShouldPopPostGameModal] = useState(false);
+
+  useEffect(() => {
+    if (hitShots.length === 4) {
+      setTimeout(() => {
+        setShouldPopPostGameModal(true);
+      }, 250);
+    }
+  }, [hitShots]);
 
   const onTileClicked = useCallback(
     (x, y) => {
@@ -75,54 +87,63 @@ function Game() {
   }
 
   return (
-    <div className="gameContainer">
-      <div className="headerSubtext">daily battle #1</div>
+    <>
+      <div className="gameContainer">
+        <div className="headerSubtext">
+          daily battle #{getDailyPuzzleNumber()}
+        </div>
 
-      <div className="boardRow">
-        <Tile onClicked={onTileClicked} x={0} y={0} />
-        <Tile onClicked={onTileClicked} x={1} y={0} />
-        <Tile onClicked={onTileClicked} x={2} y={0} />
-        <Tile onClicked={onTileClicked} x={3} y={0} />
-        <Tile onClicked={onTileClicked} x={4} y={0} />
-      </div>
-      <div className="boardRow">
-        <Tile onClicked={onTileClicked} x={0} y={1} />
-        <Tile onClicked={onTileClicked} x={1} y={1} />
-        <Tile onClicked={onTileClicked} x={2} y={1} />
-        <Tile onClicked={onTileClicked} x={3} y={1} />
-        <Tile onClicked={onTileClicked} x={4} y={1} />
-      </div>
-      <div className="boardRow">
-        <Tile onClicked={onTileClicked} x={0} y={2} />
-        <Tile onClicked={onTileClicked} x={1} y={2} />
-        <Tile onClicked={onTileClicked} x={2} y={2} />
-        <Tile onClicked={onTileClicked} x={3} y={2} />
-        <Tile onClicked={onTileClicked} x={4} y={2} />
-      </div>
-      <div className="boardRow">
-        <Tile onClicked={onTileClicked} x={0} y={3} />
-        <Tile onClicked={onTileClicked} x={1} y={3} />
-        <Tile onClicked={onTileClicked} x={2} y={3} />
-        <Tile onClicked={onTileClicked} x={3} y={3} />
-        <Tile onClicked={onTileClicked} x={4} y={3} />
-      </div>
-      <div className="boardRow">
-        <Tile onClicked={onTileClicked} x={0} y={4} />
-        <Tile onClicked={onTileClicked} x={1} y={4} />
-        <Tile onClicked={onTileClicked} x={2} y={4} />
-        <Tile onClicked={onTileClicked} x={3} y={4} />
-        <Tile onClicked={onTileClicked} x={4} y={4} />
-      </div>
+        <div className="boardRow">
+          <Tile onClicked={onTileClicked} x={0} y={0} />
+          <Tile onClicked={onTileClicked} x={1} y={0} />
+          <Tile onClicked={onTileClicked} x={2} y={0} />
+          <Tile onClicked={onTileClicked} x={3} y={0} />
+          <Tile onClicked={onTileClicked} x={4} y={0} />
+        </div>
+        <div className="boardRow">
+          <Tile onClicked={onTileClicked} x={0} y={1} />
+          <Tile onClicked={onTileClicked} x={1} y={1} />
+          <Tile onClicked={onTileClicked} x={2} y={1} />
+          <Tile onClicked={onTileClicked} x={3} y={1} />
+          <Tile onClicked={onTileClicked} x={4} y={1} />
+        </div>
+        <div className="boardRow">
+          <Tile onClicked={onTileClicked} x={0} y={2} />
+          <Tile onClicked={onTileClicked} x={1} y={2} />
+          <Tile onClicked={onTileClicked} x={2} y={2} />
+          <Tile onClicked={onTileClicked} x={3} y={2} />
+          <Tile onClicked={onTileClicked} x={4} y={2} />
+        </div>
+        <div className="boardRow">
+          <Tile onClicked={onTileClicked} x={0} y={3} />
+          <Tile onClicked={onTileClicked} x={1} y={3} />
+          <Tile onClicked={onTileClicked} x={2} y={3} />
+          <Tile onClicked={onTileClicked} x={3} y={3} />
+          <Tile onClicked={onTileClicked} x={4} y={3} />
+        </div>
+        <div className="boardRow">
+          <Tile onClicked={onTileClicked} x={0} y={4} />
+          <Tile onClicked={onTileClicked} x={1} y={4} />
+          <Tile onClicked={onTileClicked} x={2} y={4} />
+          <Tile onClicked={onTileClicked} x={3} y={4} />
+          <Tile onClicked={onTileClicked} x={4} y={4} />
+        </div>
 
-      <Button
-        className="fireAwayButton"
-        color="red"
-        onClick={onFireAwayClicked}
-        size="big"
-      >
-        💣 fire away
-      </Button>
-    </div>
+        {!shouldPopPostGameModal && (
+          <Button
+            className="fireAwayButton"
+            color="red"
+            onClick={onFireAwayClicked}
+            size="big"
+          >
+            💣 fire away
+          </Button>
+        )}
+      </div>
+      {shouldPopPostGameModal && (
+        <PostGameModal score={hitShots.length + missedShots.length} />
+      )}
+    </>
   );
 }
 
