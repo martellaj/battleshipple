@@ -48,7 +48,7 @@ function Game() {
     setTimeout(() => {
       setShouldPopPostGameModal(hitShots.length === 4);
     }, 1000);
-  });
+  }, []);
 
   useEffect(() => {
     if (hitShots.length === 4) {
