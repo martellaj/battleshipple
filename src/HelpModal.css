@@ -14,8 +14,16 @@
   display: flex !important;
   flex-direction: column !important;
   font-size: 20px;
+  align-items: flex-start;
 }
 
 #helpModalContainer div {
   margin-bottom: 24px;
+}
+
+.helpModalTitle {
+  margin: auto;
+  margin-bottom: 12px;
+  font-size: 24px;
+  font-weight: bold;
 }

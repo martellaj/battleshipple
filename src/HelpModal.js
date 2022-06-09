@@ -7,6 +7,7 @@ function HelpModal(props) {
 
   return (
     <Modal
+      closeIcon
       id="helpModalContainer"
       className="helpModalContainer"
       onClose={() => {
@@ -17,6 +18,7 @@ function HelpModal(props) {
       open={open}
       size="small"
     >
+      <div className="helpModalTitle">HOW TO PLAY</div>
       <div>👉 Select a spot</div>
       <div>💣 Fire away at that location</div>
       <div>❌ means you missed</div>

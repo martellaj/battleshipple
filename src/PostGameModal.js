@@ -1,6 +1,6 @@
 import "./PostGameModal.css";
 import { Modal, Button } from "semantic-ui-react";
-import { useCallback, useState, useEffect } from "react";
+import { useState } from "react";
 import copy from "copy-to-clipboard";
 import getDailyPuzzleNumber from "./helpers/getDailyPuzzleNumber";
 
@@ -15,6 +15,7 @@ function PostGameModal(props) {
 
   return (
     <Modal
+      closeIcon
       id="postGameModalContainer"
       className="postGameModalContainer"
       onClose={() => setOpen(false)}
@@ -22,9 +23,9 @@ function PostGameModal(props) {
       open={open}
       size="small"
     >
-      <div className="pgHeader">
-        You sunk the battleship in <strong>{score} shots!</strong>
-      </div>
+      <div className="pgHeader">You sunk the battleship!</div>
+
+      <div className="pgScore">{score} shots 💣</div>
 
       <Button
         size="large"
@@ -65,12 +66,12 @@ function PostGameModal(props) {
         {buttonText}
       </Button>
 
-      <div className="pgRow" style={{ marginBottom: "2px" }}>
+      {/* <div className="pgRow" style={{ marginBottom: "2px" }}>
         👑 : {best}
       </div>
       <div className="pgRow" style={{ fontSize: "14px" }}>
         (best score)
-      </div>
+      </div> */}
     </Modal>
   );
 }

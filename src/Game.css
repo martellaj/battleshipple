@@ -4,6 +4,8 @@
   align-items: center;
   justify-content: center;
   user-select: none;
+  width: 100%;
+  padding: 0 12px;
 
   margin-top: 10%;
   max-height: 800px;
@@ -14,6 +16,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
 
 .tile {
@@ -24,9 +27,10 @@
   cursor: pointer;
   display: flex;
   font-size: xx-large;
-  height: min(80px, 15vw);
+  /* height: min(80px, 15vw); */
   justify-content: center;
-  width: min(80px, 15vw);
+  /* width: min(80px, 15vw); */
+  flex-grow: 1;
 
   border-radius: 10px;
   margin: 2px;

@@ -8,6 +8,18 @@ import getDailyPuzzleNumber from "./helpers/getDailyPuzzleNumber";
 function Game() {
   const shipCoords = getShipCoords(getDailyPuzzleNumber()); // [{x, y}]
 
+  const [tileWidth, setTileWidth] = useState(null);
+
+  useEffect(() => {
+    const tile = document.getElementsByClassName("tile")[0];
+    setTileWidth(`${tile.offsetWidth}px`);
+
+    requestAnimationFrame(() => {
+      const tile = document.getElementsByClassName("tile")[0];
+      setTileWidth(`${tile.offsetWidth}px`);
+    });
+  }, []);
+
   const [selectedTile, setSelectedTile] = useState(null);
   const [missedShots, setMissedShots] = useState(() => {
     const missedShots = window.localStorage.getItem(
@@ -30,9 +42,13 @@ function Game() {
       : []
   );
 
-  const [shouldPopPostGameModal, setShouldPopPostGameModal] = useState(
-    hitShots.length === 4
-  );
+  const [shouldPopPostGameModal, setShouldPopPostGameModal] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShouldPopPostGameModal(hitShots.length === 4);
+    }, 1000);
+  });
 
   useEffect(() => {
     if (hitShots.length === 4) {
@@ -127,6 +143,7 @@ function Game() {
 
     return (
       <div
+        style={{ height: tileWidth }}
         className={`tile ${isSelected && "tile--selected"} ${
           isInFirstRow && "tile--first-row"
         } ${isMissedShot && "tile--missed"} ${isHitShot && "tile--hit"}`}
