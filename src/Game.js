@@ -76,6 +76,8 @@ function Game() {
 
   return (
     <div className="gameContainer">
+      <div className="headerSubtext">daily battle #1</div>
+
       <div className="boardRow">
         <Tile onClicked={onTileClicked} x={0} y={0} />
         <Tile onClicked={onTileClicked} x={1} y={0} />

@@ -12,7 +12,7 @@
 
 .headerText {
   font-variant: all-small-caps;
-  font-size: 28px;
+  font-size: 4vh;
 }
 
 .headerButton {
@@ -26,4 +26,11 @@
   letter-spacing: 0.2rem !important;
   align-items: center;
   font-size: 20px !important;
+}
+
+.headerSubtext {
+  font-size: 2vh;
+  color: #b1b3b4;
+  font-variant: all-small-caps;
+  margin-bottom: 16px;
 }

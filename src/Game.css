@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
 
-  height: 100%;
+  margin-top: 10%;
   max-height: 800px;
 }
 
@@ -18,7 +18,7 @@
 .tile {
   align-items: center;
   background-color: #cffafe;
-  border: 1px solid #00a6ed;
+  /* border: 1px solid #00a6ed; */
   cursor: pointer;
   display: flex;
   font-size: xx-large;
@@ -34,11 +34,11 @@
 }
 
 .tile--first-row {
-  border-top: 1px solid #00a6ed;
+  /* border-top: 1px solid #00a6ed; */
 }
 
 .tile:nth-of-type(5) {
-  border-right: 1px solid #00a6ed;
+  /* border-right: 1px solid #00a6ed; */
 }
 
 .tile--selected {
