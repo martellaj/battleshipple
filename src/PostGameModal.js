@@ -7,9 +7,11 @@ import getDailyPuzzleNumber from "./helpers/getDailyPuzzleNumber";
 function PostGameModal(props) {
   const [open, setOpen] = useState(true);
 
+  const [buttonText, setButtonText] = useState("SHARE");
+
   const { score, shotOrder } = props;
 
-  const best = 4;
+  const best = window.localStorage.getItem("bestScore");
 
   return (
     <Modal
@@ -51,14 +53,24 @@ function PostGameModal(props) {
             });
           } else {
             copy(text);
+
+            setButtonText("COPIED!");
+
+            setTimeout(() => {
+              setButtonText("SHARE");
+            }, 2000);
           }
         }}
       >
-        SHARE
+        {buttonText}
       </Button>
 
-      <div className="pgRow">best 👑: {best}</div>
-      <div className="pgRow">average 💣: {best}</div>
+      <div className="pgRow" style={{ marginBottom: "2px" }}>
+        👑 : {best}
+      </div>
+      <div className="pgRow" style={{ fontSize: "14px" }}>
+        (best score)
+      </div>
     </Modal>
   );
 }

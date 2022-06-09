@@ -18,11 +18,25 @@ function Game() {
 
   useEffect(() => {
     if (hitShots.length === 4) {
+      const best = window.localStorage.getItem("bestScore");
+      if (best) {
+        const _best = parseInt(best);
+        window.localStorage.setItem(
+          "bestScore",
+          Math.min(hitShots.length + missedShots.length, _best)
+        );
+      } else {
+        window.localStorage.setItem(
+          "bestScore",
+          hitShots.length + missedShots.length
+        );
+      }
+
       setTimeout(() => {
         setShouldPopPostGameModal(true);
       }, 250);
     }
-  }, [hitShots]);
+  }, [hitShots, missedShots]);
 
   const onTileClicked = useCallback(
     (x, y) => {
