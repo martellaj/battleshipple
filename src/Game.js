@@ -6,7 +6,7 @@ import PostGameModal from "./PostGameModal";
 import getDailyPuzzleNumber from "./helpers/getDailyPuzzleNumber";
 
 function Game() {
-  const shipCoords = getShipCoords(); // [{x, y}]
+  const shipCoords = getShipCoords(getDailyPuzzleNumber()); // [{x, y}]
 
   const [selectedTile, setSelectedTile] = useState(null);
   const [missedShots, setMissedShots] = useState(() => {

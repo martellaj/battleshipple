@@ -7,7 +7,7 @@ const getDailyPuzzleNumber = () => {
     return parseInt(params.p);
   }
 
-  const refDate = new Date(2022, 5, 7, 0, 0, 0, 0);
+  const refDate = new Date(2022, 5, 8, 0, 0, 0, 0);
   const _date = new Date();
   const val =
     new Date(_date).setHours(0, 0, 0, 0) - refDate.setHours(0, 0, 0, 0);
