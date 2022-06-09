@@ -31,7 +31,7 @@ function PostGameModal(props) {
         positive={true}
         className="shareButton"
         onClick={() => {
-          let text = `#Battleshipple ${getDailyPuzzleNumber()}\n\n${shotOrder}\n\nhttps://battleshipple.com`;
+          let text = `#Battleshipple ${getDailyPuzzleNumber()}\n\n${score}/25\n${shotOrder}\n\nhttps://battleshipple.com`;
           var ua = navigator.userAgent.toLowerCase();
           var isAndroid = ua.indexOf("android") > -1;
 
