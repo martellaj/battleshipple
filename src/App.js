@@ -2,6 +2,15 @@ import "./App.css";
 import Game from "./Game";
 import Header from "./Header";
 
+// set the app height for mobile
+const appHeight = () =>
+  document.documentElement.style.setProperty(
+    "--app-height",
+    `${window.innerHeight}px`
+  );
+window.addEventListener("resize", appHeight);
+appHeight();
+
 function App() {
   return (
     <div className="App">
