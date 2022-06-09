@@ -1,11 +1,13 @@
 import "./PostGameModal.css";
 import { Modal, Button } from "semantic-ui-react";
 import { useCallback, useState, useEffect } from "react";
+import copy from "copy-to-clipboard";
+import getDailyPuzzleNumber from "./helpers/getDailyPuzzleNumber";
 
 function PostGameModal(props) {
   const [open, setOpen] = useState(true);
 
-  const { score } = props;
+  const { score, shotOrder } = props;
 
   const best = 4;
 
@@ -22,7 +24,36 @@ function PostGameModal(props) {
         You sunk the battleship in <strong>{score} shots!</strong>
       </div>
 
-      <Button size="large" positive={true} className="shareButton">
+      <Button
+        size="large"
+        positive={true}
+        className="shareButton"
+        onClick={() => {
+          let text = `#Battleshipple ${getDailyPuzzleNumber()}\n\n${shotOrder}\n\nhttps://battleshipple.com`;
+          var ua = navigator.userAgent.toLowerCase();
+          var isAndroid = ua.indexOf("android") > -1;
+
+          const isIos =
+            [
+              "iPad Simulator",
+              "iPhone Simulator",
+              "iPod Simulator",
+              "iPad",
+              "iPhone",
+              "iPod",
+            ].includes(navigator.platform) ||
+            // iPad on iOS 13 detection
+            (navigator.userAgent.includes("Mac") && "ontouchend" in document);
+
+          if (isIos || isAndroid) {
+            navigator.share({
+              text: text,
+            });
+          } else {
+            copy(text);
+          }
+        }}
+      >
         SHARE
       </Button>
 

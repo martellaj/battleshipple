@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect } from "react";
+import { useCallback, useState, useEffect, useRef } from "react";
 import "./Game.css";
 import getShipCoords from "./helpers/getShipCoords";
 import { Button } from "semantic-ui-react";
@@ -11,6 +11,8 @@ function Game() {
   const [selectedTile, setSelectedTile] = useState(null);
   const [missedShots, setMissedShots] = useState([]);
   const [hitShots, setHitShots] = useState([]);
+
+  const shotOrder = useRef([]);
 
   const [shouldPopPostGameModal, setShouldPopPostGameModal] = useState(false);
 
@@ -50,8 +52,10 @@ function Game() {
     );
 
     if (isHit) {
+      shotOrder.current.push("💥");
       setHitShots([...hitShots, selectedTile]);
     } else {
+      shotOrder.current.push("❌");
       setMissedShots([...missedShots, selectedTile]);
     }
   }, [selectedTile, missedShots, hitShots, shipCoords]);
@@ -141,7 +145,10 @@ function Game() {
         )}
       </div>
       {shouldPopPostGameModal && (
-        <PostGameModal score={hitShots.length + missedShots.length} />
+        <PostGameModal
+          score={hitShots.length + missedShots.length}
+          shotOrder={shotOrder.current.join("")}
+        />
       )}
     </>
   );
