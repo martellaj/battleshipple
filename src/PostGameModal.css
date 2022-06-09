@@ -20,9 +20,9 @@
 }
 
 .pgScore {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
   font-size: 24px;
   margin-bottom: 12px;
 }
