@@ -9,12 +9,30 @@ function Game() {
   const shipCoords = getShipCoords(); // [{x, y}]
 
   const [selectedTile, setSelectedTile] = useState(null);
-  const [missedShots, setMissedShots] = useState([]);
-  const [hitShots, setHitShots] = useState([]);
+  const [missedShots, setMissedShots] = useState(() => {
+    const missedShots = window.localStorage.getItem(
+      `missedShots-${getDailyPuzzleNumber()}`
+    );
+    return missedShots ? JSON.parse(missedShots) : [];
+  });
+  const [hitShots, setHitShots] = useState(() => {
+    const hitShots = window.localStorage.getItem(
+      `hitShots-${getDailyPuzzleNumber()}`
+    );
+    return hitShots ? JSON.parse(hitShots) : [];
+  });
 
-  const shotOrder = useRef([]);
+  const shotOrder = useRef(
+    window.localStorage.getItem(`shotOrder-${getDailyPuzzleNumber()}`)
+      ? JSON.parse(
+          window.localStorage.getItem(`shotOrder-${getDailyPuzzleNumber()}`)
+        )
+      : []
+  );
 
-  const [shouldPopPostGameModal, setShouldPopPostGameModal] = useState(false);
+  const [shouldPopPostGameModal, setShouldPopPostGameModal] = useState(
+    hitShots.length === 4
+  );
 
   useEffect(() => {
     if (hitShots.length === 4) {
@@ -68,10 +86,25 @@ function Game() {
     if (isHit) {
       shotOrder.current.push("💥");
       setHitShots([...hitShots, selectedTile]);
+
+      window.localStorage.setItem(
+        `hitShots-${getDailyPuzzleNumber()}`,
+        JSON.stringify([...hitShots, selectedTile])
+      );
     } else {
       shotOrder.current.push("❌");
       setMissedShots([...missedShots, selectedTile]);
+
+      window.localStorage.setItem(
+        `missedShots-${getDailyPuzzleNumber()}`,
+        JSON.stringify([...missedShots, selectedTile])
+      );
     }
+
+    window.localStorage.setItem(
+      `shotOrder-${getDailyPuzzleNumber()}`,
+      JSON.stringify(shotOrder.current)
+    );
   }, [selectedTile, missedShots, hitShots, shipCoords]);
 
   function Tile(tileProps) {
@@ -161,7 +194,7 @@ function Game() {
       {shouldPopPostGameModal && (
         <PostGameModal
           score={hitShots.length + missedShots.length}
-          shotOrder={shotOrder.current.join("")}
+          shotOrder={shotOrder.current?.join?.("")}
         />
       )}
     </>
