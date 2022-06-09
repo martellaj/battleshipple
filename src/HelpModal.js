@@ -19,8 +19,8 @@ function HelpModal(props) {
     >
       <div>👉 Select a spot</div>
       <div>💣 Fire away at that location</div>
-      <div>❌ The X means you missed</div>
-      <div>💥 The blast means you hit the battleship</div>
+      <div>❌ means you missed</div>
+      <div>💥 means you hit the battleship</div>
       <div>🏆 Sink the battleship (4 hits) in as few shots as possible</div>
       <div>🕛 New battle at midnight</div>
     </Modal>
