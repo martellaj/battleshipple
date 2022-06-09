@@ -25,7 +25,11 @@ function PostGameModal(props) {
     >
       <div className="pgHeader">You sunk the battleship!</div>
 
-      <span className="pgScore">{score} shots 💣</span>
+      <div style={{ fontSize: "30px" }}>💣</div>
+
+      <span className="pgScore">{score} shots</span>
+
+      <div style={{ fontSize: "30px", textAlign: "center" }}>{shotOrder}</div>
 
       <Button
         size="large"
