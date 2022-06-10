@@ -29,7 +29,17 @@ function PostGameModal(props) {
 
       <span className="pgScore">{score} shots</span>
 
-      <div style={{ fontSize: "30px", textAlign: "center" }}>{shotOrder}</div>
+      <div
+        style={{
+          fontSize: "30px",
+          textAlign: "center",
+          display: "flex",
+          flexWrap: "wrap",
+          width: "100%",
+        }}
+      >
+        {shotOrder}
+      </div>
 
       <Button
         size="large"
