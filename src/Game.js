@@ -81,13 +81,11 @@ function Game() {
 
       if (isMissedShot || isHitShot) {
         setSelectedTile(null);
-      } else if (selectedTile && x === selectedTile.x && y === selectedTile.y) {
-        setSelectedTile(null);
       } else {
         setSelectedTile({ x, y });
       }
     },
-    [selectedTile, hitShots, missedShots]
+    [hitShots, missedShots]
   );
 
   const onFireAwayClicked = useCallback(() => {
