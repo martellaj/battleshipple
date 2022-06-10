@@ -95,6 +95,17 @@ function Game() {
       return;
     }
 
+    const isHitShot = hitShots.some(
+      (shot) => shot.x === selectedTile.x && shot.y === selectedTile.y
+    );
+    const isMissedShot = missedShots.some(
+      (shot) => shot.x === selectedTile.x && shot.y === selectedTile.y
+    );
+
+    if (isHitShot || isMissedShot) {
+      return;
+    }
+
     const isHit = shipCoords.some(
       (shot) => shot.x === selectedTile.x && shot.y === selectedTile.y
     );
