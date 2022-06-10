@@ -6,7 +6,7 @@ import PostGameModal from "./PostGameModal";
 import getDailyPuzzleNumber from "./helpers/getDailyPuzzleNumber";
 
 function Game() {
-  const shipCoords = getShipCoords(getDailyPuzzleNumber()); // [{x, y}]
+  const shipCoords = useRef(getShipCoords(getDailyPuzzleNumber())); // [{x, y}]
 
   const [tileWidth, setTileWidth] = useState(null);
 
@@ -106,7 +106,7 @@ function Game() {
       return;
     }
 
-    const isHit = shipCoords.some(
+    const isHit = shipCoords.current?.some(
       (shot) => shot.x === selectedTile.x && shot.y === selectedTile.y
     );
 
@@ -169,7 +169,8 @@ function Game() {
     <>
       <div className="gameContainer">
         <div className="headerSubtext">
-          daily battle #{getDailyPuzzleNumber()}
+          {getDailyPuzzleNumber() < 100 ? "daily " : ""}battle #
+          {getDailyPuzzleNumber()}
         </div>
 
         <div className="boardRow">
