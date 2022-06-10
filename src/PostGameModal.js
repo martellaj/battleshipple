@@ -36,6 +36,7 @@ function PostGameModal(props) {
           display: "flex",
           flexWrap: "wrap",
           width: "100%",
+          justifyContent: "center",
         }}
       >
         {shotOrder}
