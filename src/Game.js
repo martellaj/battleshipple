@@ -72,65 +72,50 @@ function Game() {
     }
   }, [hitShots, missedShots]);
 
-  const onTileClicked = useCallback(
+  const onTileClicked = (x, y) => {
+    onFireAwayClicked(x, y);
+  };
+
+  const onFireAwayClicked = useCallback(
     (x, y) => {
+      const isHitShot = hitShots.some((shot) => shot.x === x && shot.y === y);
       const isMissedShot = missedShots.some(
         (shot) => shot.x === x && shot.y === y
       );
-      const isHitShot = hitShots.some((shot) => shot.x === x && shot.y === y);
 
-      if (isMissedShot || isHitShot) {
-        setSelectedTile(null);
-      } else {
-        setSelectedTile({ x, y });
+      if (isHitShot || isMissedShot) {
+        return;
       }
+
+      const isHit = shipCoords.current?.some(
+        (shot) => shot.x === x && shot.y === y
+      );
+
+      if (isHit) {
+        shotOrder.current.push("💥");
+        setHitShots([...hitShots, { x, y }]);
+
+        window.localStorage.setItem(
+          `hitShots-${getDailyPuzzleNumber()}`,
+          JSON.stringify([...hitShots, { x, y }])
+        );
+      } else {
+        shotOrder.current.push("❌");
+        setMissedShots([...missedShots, { x, y }]);
+
+        window.localStorage.setItem(
+          `missedShots-${getDailyPuzzleNumber()}`,
+          JSON.stringify([...missedShots, { x, y }])
+        );
+      }
+
+      window.localStorage.setItem(
+        `shotOrder-${getDailyPuzzleNumber()}`,
+        JSON.stringify(shotOrder.current)
+      );
     },
-    [hitShots, missedShots]
+    [missedShots, hitShots, shipCoords]
   );
-
-  const onFireAwayClicked = useCallback(() => {
-    if (!selectedTile) {
-      return;
-    }
-
-    const isHitShot = hitShots.some(
-      (shot) => shot.x === selectedTile.x && shot.y === selectedTile.y
-    );
-    const isMissedShot = missedShots.some(
-      (shot) => shot.x === selectedTile.x && shot.y === selectedTile.y
-    );
-
-    if (isHitShot || isMissedShot) {
-      return;
-    }
-
-    const isHit = shipCoords.current?.some(
-      (shot) => shot.x === selectedTile.x && shot.y === selectedTile.y
-    );
-
-    if (isHit) {
-      shotOrder.current.push("💥");
-      setHitShots([...hitShots, selectedTile]);
-
-      window.localStorage.setItem(
-        `hitShots-${getDailyPuzzleNumber()}`,
-        JSON.stringify([...hitShots, selectedTile])
-      );
-    } else {
-      shotOrder.current.push("❌");
-      setMissedShots([...missedShots, selectedTile]);
-
-      window.localStorage.setItem(
-        `missedShots-${getDailyPuzzleNumber()}`,
-        JSON.stringify([...missedShots, selectedTile])
-      );
-    }
-
-    window.localStorage.setItem(
-      `shotOrder-${getDailyPuzzleNumber()}`,
-      JSON.stringify(shotOrder.current)
-    );
-  }, [selectedTile, missedShots, hitShots, shipCoords]);
 
   function Tile(tileProps) {
     const { x, y, onClicked } = tileProps;
@@ -207,7 +192,7 @@ function Game() {
           <Tile onClicked={onTileClicked} x={4} y={4} />
         </div>
 
-        {!shouldPopPostGameModal && (
+        {/* {!shouldPopPostGameModal && (
           <Button
             className="fireAwayButton"
             color="red"
@@ -216,7 +201,7 @@ function Game() {
           >
             💣 fire away
           </Button>
-        )}
+        )} */}
       </div>
       {shouldPopPostGameModal && (
         <PostGameModal

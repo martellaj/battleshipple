@@ -3,13 +3,13 @@ import { Icon } from "semantic-ui-react";
 import { useEffect, useState } from "react";
 import HelpModal from "./HelpModal";
 
-const seenHelp = window.localStorage.getItem("seenHelp");
+const seenHelp = window.localStorage.getItem("seenHelp2");
 
 function Header() {
   const [showHelpModal, setShowHelpModal] = useState(!seenHelp);
 
   useEffect(() => {
-    window.localStorage.setItem("seenHelp", true);
+    window.localStorage.setItem("seenHelp2", true);
   }, []);
 
   return (
