@@ -46,12 +46,12 @@ function Game() {
 
   useEffect(() => {
     setTimeout(() => {
-      setShouldPopPostGameModal(hitShots.length === 4);
+      setShouldPopPostGameModal(hitShots.length === 3);
     }, 1000);
   }, []);
 
   useEffect(() => {
-    if (hitShots.length === 4) {
+    if (hitShots.length === 3) {
       const best = window.localStorage.getItem("bestScore");
       if (best) {
         const _best = parseInt(best);

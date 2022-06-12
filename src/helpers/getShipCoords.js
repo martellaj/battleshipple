@@ -8,8 +8,8 @@ export default function getShipCoords(puzzleNumber) {
 
   const coords = [];
 
-  const x = getRandomInt(0, 4);
-  const y = getRandomInt(0, 4);
+  const x = getRandomInt(0, 3);
+  const y = getRandomInt(0, 3);
 
   coords.push({ x, y });
 
@@ -17,20 +17,20 @@ export default function getShipCoords(puzzleNumber) {
   if (orientation === "horizontal") {
     // keep y the same and change x
     if (x < 2) {
-      coords.push({ x: x + 1, y }, { x: x + 2, y }, { x: x + 3, y });
+      coords.push({ x: x + 1, y }, { x: x + 2, y });
     } else if (x > 2) {
-      coords.push({ x: x - 1, y }, { x: x - 2, y }, { x: x - 3, y });
+      coords.push({ x: x - 1, y }, { x: x - 2, y });
     } else {
-      coords.push({ x: 1, y }, { x: 0, y }, { x: 3, y });
+      coords.push({ x: 1, y }, { x: 0, y });
     }
   } else {
     // keep x the same and change y
     if (y < 2) {
-      coords.push({ y: y + 1, x }, { y: y + 2, x }, { y: y + 3, x });
+      coords.push({ y: y + 1, x }, { y: y + 2, x });
     } else if (y > 2) {
-      coords.push({ y: y - 1, x }, { y: y - 2, x }, { y: y - 3, x });
+      coords.push({ y: y - 1, x }, { y: y - 2, x });
     } else {
-      coords.push({ y: 1, x }, { y: 0, x }, { y: 3, x });
+      coords.push({ y: 1, x }, { y: 0, x });
     }
   }
 
