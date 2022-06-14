@@ -6,6 +6,18 @@ import Header from "./Header";
 // window.location.href = window.location.origin + window.location.pathname;
 window.history.pushState({}, document.title, "/");
 
+let playingBackgroundMusic = 0;
+const playMusic = () => {
+  if (playingBackgroundMusic === 0) {
+    playingBackgroundMusic = 1;
+    try {
+      const music = new Audio('/background_music.wav');
+      music.volume = .05;
+      music.play().then(() => playingBackgroundMusic = 1).catch(() => playingBackgroundMusic = 0);  
+    } catch (e) { playingBackgroundMusic = 0;}
+  }
+}
+
 // set the app height for mobile
 const appHeight = () =>
   document.documentElement.style.setProperty(
@@ -17,7 +29,7 @@ appHeight();
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" onMouseMove={playMusic}>
       <Header />
       <Game />
       <a
