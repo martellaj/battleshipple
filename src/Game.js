@@ -87,9 +87,6 @@ function Game() {
         return;
       }
 
-      const audio = new Audio('/shoot.wav');
-      audio.play();
-
       const isHit = shipCoords.current?.some(
         (shot) => shot.x === x && shot.y === y
       );
